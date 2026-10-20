@@ -1,10 +1,10 @@
 # setup-ssh
 
-Windows OpenSSH 服务端 / 客户端一键安装与配置脚本（PowerShell 5.1+，当前版本 **v7.6**）。
+Windows OpenSSH 服务端 / 客户端一键安装与配置脚本（PowerShell 5.1+，当前版本 **v7.6**），附 Linux 端 `setup-ssh.sh`。
 
 面向“全新系统装不上、装上了连不上、连上了密钥登录又失败”这类真实场景，把主机密钥、ACL、账号 profile、防火墙、客户端密钥、自检等一整套流程做成可重复执行的幂等脚本。所有关键修复都有实机复现依据，详见脚本文件头的版本说明。
 
-> 适用于 Windows 10 / 11；Windows Server 2019+ 理论兼容但未充分验证。
+> Windows 适用于 Windows 10 / 11；Windows Server 2019+ 理论兼容但未充分验证。Linux 端支持 Debian/Ubuntu、RHEL/CentOS/Rocky/Alma/Fedora/openEuler、openSUSE/SLES、Arch、Alpine、Amazon Linux、Alibaba Cloud Linux。
 
 ---
 
@@ -77,6 +77,20 @@ payload\sshd.exe ...
 ```
 
 `-PreferOffline` 会优先走离线路径；普通模式下离线包位于降级链的 `DISM` 之后、`winget` 之前。
+
+---
+
+### Linux 端（setup-ssh.sh）
+
+```bash
+sudo bash setup-ssh.sh                          # 安装 + 启动 + 防火墙 + 验证
+sudo bash setup-ssh.sh --port=2222              # 自定义端口
+sudo bash setup-ssh.sh --no-firewall            # 跳过防火墙
+sudo bash setup-ssh.sh --root-login             # 启用 root 密码登录（可选 =密码）
+sudo bash setup-ssh.sh --create-user=ops        # 创建可登录用户（可选 :密码）
+```
+
+自动识别发行版并选择 `ufw` / `firewalld` / `nftables` / `iptables` 后端。
 
 ---
 
@@ -221,11 +235,9 @@ v7.6 会自动创建 `Profile=Any` 规则；旧版本请手动补建。
 | `setup-ssh.ps1` | 主脚本（v7.6）。 |
 | `setup-ssh.bat` | 双击入口，自动提权并转发参数。 |
 | `fix-sshd-keys.ps1/.cmd` | 主机密钥 ACL/owner 修复工具（独立版）。 |
-| `setup-ssh.sh` | Linux 侧辅助脚本（历史文件）。 |
-| `创建SSH账号.cmd` | 账号创建辅助入口。 |
-| `OpenSSH-Offline-Bundle.zip` | 离线负载，**未纳入仓库**。 |
-
-> 本仓库当前只跟踪 `setup-ssh.ps1`；其余配套文件可按需补充。
+| `setup-ssh.sh` | Linux 端安装脚本（多发行版 + 防火墙后端自动选择）。 |
+| `创建SSH账号.cmd` | 账号创建辅助入口（等价于 `setup-ssh.bat -AddSshUser`）。 |
+| `OpenSSH-Offline-Bundle.zip` | 离线负载，**未纳入仓库**（可自行准备）。 |
 
 ---
 
