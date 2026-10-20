@@ -1,0 +1,7 @@
+# 历史备份与离线负载不入库
+*.bak-*
+*.v1-backup
+*.v5-backup
+OpenSSH-Offline-Bundle.zip
+_diag/
+_test/
