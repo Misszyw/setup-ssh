@@ -67,7 +67,7 @@ setup-ssh.bat
 
 ### 离线安装
 
-离线包**不在本仓库中**（体积原因），可自行准备以下任一种，放在脚本同目录或上级目录：
+离线包**不在本仓库中**（体积原因），可从 [Releases](https://github.com/Misszyw/setup-ssh/releases) 下载，或自行准备以下任一种，放在脚本同目录或上级目录：
 
 ```text
 setup-ssh.ps1
@@ -237,7 +237,7 @@ v7.6 会自动创建 `Profile=Any` 规则；旧版本请手动补建。
 | `fix-sshd-keys.ps1/.cmd` | 主机密钥 ACL/owner 修复工具（独立版）。 |
 | `setup-ssh.sh` | Linux 端安装脚本（多发行版 + 防火墙后端自动选择）。 |
 | `创建SSH账号.cmd` | 账号创建辅助入口（等价于 `setup-ssh.bat -AddSshUser`）。 |
-| `OpenSSH-Offline-Bundle.zip` | 离线负载，**未纳入仓库**（可自行准备）。 |
+| `OpenSSH-Offline-Bundle.zip` | 离线负载，**未纳入仓库**；从 [Releases](https://github.com/Misszyw/setup-ssh/releases) 下载。 |
 
 ---
 
